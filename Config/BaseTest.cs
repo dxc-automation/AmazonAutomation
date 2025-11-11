@@ -20,8 +20,7 @@ namespace AmazonAutomation.Tests.Config
         public void Setup()
         {
             Driver = DriverFactory.CreateDriver();
-            Driver.Manage().Timeouts().ImplicitWait =
-                TimeSpan.FromSeconds(ConfigReader.GetInt("ImplicitWaitSeconds", 10));
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(ConfigReader.GetInt("ImplicitWaitSeconds", 10));
             Reporter = Reporting.CreateReporter();
             Driver.Manage().Window.Maximize();
         }

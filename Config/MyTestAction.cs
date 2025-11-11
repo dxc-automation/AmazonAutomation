@@ -23,7 +23,6 @@ namespace AmazonAutomation.Tests.Config
 
         public ActionTargets Targets
         {
-            // Може да е Test или Suite (ако искаш да важи за целия клас)
             get { return ActionTargets.Test; }
         }
     }

@@ -18,6 +18,7 @@ namespace AmazonAutomation.Tests
         public void AddFinalEmpire_Hardcover_ToCart()
         {
             Constants.ReadTestData();
+
             string file    = Path.Combine(Environment.CurrentDirectory, "appsettings.json");
 
             Reporter.CreateNewTestReport("Add Product To Cart");
