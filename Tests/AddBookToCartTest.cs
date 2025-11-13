@@ -47,14 +47,10 @@ namespace AmazonAutomation.Tests
             }
 
             var products = new ProductPage(Driver);
-            var title = products.GetTitle();
-
             products.ChooseHardcoverIfAvailable();
             products.AddToCart();
+            products.OpenProductPage(Constants.BaseUrl + "/gp/cart/view.html?ref_=nav_cart");
 
-            Thread.Sleep(3000);
-
-            Driver.Navigate().GoToUrl(Constants.BaseUrl + "/gp/cart/view.html?ref_=nav_cart");
             var cart = new CartPage(Driver);
             var found = cart.VerifyProductInCart("The Final Empire");
             Assert.IsTrue(found, "Product not found in cart.");
