@@ -12,14 +12,17 @@ namespace AmazonAutomation.Tests.Utils
             {
                 var folder = Path.Combine(Directory.GetCurrentDirectory(), ConfigReader.GetString("ScreenshotFolder", "Screenshots"));
                 Directory.CreateDirectory(folder);
-                var fileName = $"{DateTime.Now:yyyyMMdd_HHmmss}_{name}.png";
+                string date = DateTime.Now.ToString("HH_mm_ss");
+                var fileName = name + "_" + date + ".png";
                 var path = Path.Combine(folder, fileName);
                 var ss = ((ITakesScreenshot)driver).GetScreenshot();
                 ss.SaveAsFile(path, ScreenshotImageFormat.Png);
+                Console.WriteLine(path);
                 return path;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return null;
             }
         }
