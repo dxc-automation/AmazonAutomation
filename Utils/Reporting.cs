@@ -18,10 +18,11 @@ namespace AmazonAutomation.Tests.Utils
         {
             if (_extent == null)
             {
-                var folder = Path.Combine(Directory.GetCurrentDirectory(), "Reports");
-                Directory.CreateDirectory(folder);
-                _reportPath = Path.Combine(folder, $"Report.html");
-                _htmlReporter = new ExtentSparkReporter(_reportPath);
+                string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+                string finalpth = pth.Substring(0, pth.LastIndexOf("bin")) + "Reports\\Report.html";
+                string localpath = new Uri(finalpth).LocalPath;
+
+                _htmlReporter = new ExtentSparkReporter(localpath);
                 _extent = new ExtentReports();
                 _extent.AttachReporter(_htmlReporter);
             }

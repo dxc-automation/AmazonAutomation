@@ -27,10 +27,10 @@ namespace AmazonAutomation.Tests.Config
     
 
         [TearDown]
-        public void TearDown()
+        public void Results()
         {
             var outcome = TestContext.CurrentContext.Result.Outcome.Status;
-            var path = ScreenshotHelper.TakeScreenshot(Driver, TestContext.CurrentContext.Test.Name);
+            var path    = ScreenshotHelper.Capture(Driver, TestContext.CurrentContext.Test.Name);
             var message = TestContext.CurrentContext.Result.Message;
 
             switch (outcome)
@@ -45,8 +45,12 @@ namespace AmazonAutomation.Tests.Config
                     Reporter.AddTestScreenshot(Constants.TestName, path, Constants.TestDetails);
                     Driver.Quit();
                     break;
-            }
-       
+            }    
+        }
+
+        [OneTimeTearDown]
+        public void TearDown()
+        {
             Reporter.Flush();
             Driver.Quit();
         }
