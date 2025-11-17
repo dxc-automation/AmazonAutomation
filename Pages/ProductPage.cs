@@ -13,9 +13,9 @@ namespace AmazonAutomation.Tests.Pages
     {
         public ProductPage(IWebDriver driver) : base(driver) { }
 
-        private IWebElement TitleText => Driver.FindElement(By.Id("productTitle"));
-        private IWebElement AddToCartButton => Driver.FindElement(By.Id("add-to-cart-button"));
-        private IWebElement HardcoverPriceText => Driver.FindElement(By.XPath("(//span[@class='slot-price'])[3]"));
+        private By TitleText => By.Id("productTitle");
+        private By AddToCartButton => By.Id("add-to-cart-button");
+        private By HardcoverPriceText => By.XPath("(//span[@class='slot-price'])[3]");
 
 
         public void OpenProductPage(String url)
@@ -25,19 +25,18 @@ namespace AmazonAutomation.Tests.Pages
 
         public void ChooseHardcoverIfAvailable()
         {
-            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            Wait.Until(ExpectedConditions.ElementToBeClickable(HardcoverPriceText));
-            HardcoverPriceText.Click();
+            WaitForClickable(HardcoverPriceText);
+            Click(HardcoverPriceText);
         }
 
         public string GetTitle()
         {
-           return TitleText.Text.Trim();
+           return GetText(TitleText).Trim();
         }
 
         public void AddToCart()
         { 
-            AddToCartButton.Click();
+            Click(AddToCartButton);
         }
     }
 }

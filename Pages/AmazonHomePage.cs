@@ -13,12 +13,15 @@ namespace AmazonAutomation.Tests.Pages
         public AmazonHomePage(IWebDriver driver) : base(driver) { }
 
         
-        private IWebElement SearchBox => Driver.FindElement(By.Id("//input[@id='twotabsearchtextbox']"));
-        private IWebElement SearchButton => Driver.FindElement(By.Id("nav-search-submit-button"));
+        private By SearchBox => By.Id("twotabsearchtextbox");
+        private By SearchButton => By.Id("nav-search-submit-button");
+        private By ContinueShoppingButton => By.XPath("//button[normalize-space()='Continue shopping']");
 
         public void GoTo(string url)
         {
             Driver.Url = url;
+            WaitForClickable(ContinueShoppingButton);
+            Click(ContinueShoppingButton);
             Thread.Sleep(2000);
             Driver.Navigate().Refresh();
             
@@ -26,11 +29,9 @@ namespace AmazonAutomation.Tests.Pages
 
         public void Search(string text)
         {
-            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-            Wait.Until(ExpectedConditions.ElementToBeClickable(SearchBox));
-            SearchBox.Clear();
-            SearchBox.SendKeys(text);
-            SearchButton.Click();
+            WaitForClickable(SearchBox);
+            Type(SearchBox, text);
+            Click(SearchButton);
         }
     }
 }

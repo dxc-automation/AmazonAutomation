@@ -19,7 +19,6 @@ namespace AmazonAutomation.Tests.Pages
 
         public void ClickFirstExactMatch(string exactTitle)
         {
-            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             Wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(ResultTitles));
             List<string> resultTitles = new List<string>();
 

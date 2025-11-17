@@ -17,6 +17,12 @@ namespace AmazonAutomation.Tests.Pages
             Wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
+        protected string GetText(By locator)
+        {
+            IWebElement element = Driver.FindElement(locator);
+            return element.Text;
+        }
+
         protected IWebElement WaitForElement(By locator)
         {
             return Wait.Until(ExpectedConditions.ElementIsVisible(locator));
