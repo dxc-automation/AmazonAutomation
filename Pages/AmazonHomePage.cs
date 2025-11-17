@@ -13,7 +13,7 @@ namespace AmazonAutomation.Tests.Pages
         public AmazonHomePage(IWebDriver driver) : base(driver) { }
 
         
-        private IWebElement SearchBox => Driver.FindElement(By.Id("twotabsearchtextbox"));
+        private IWebElement SearchBox => Driver.FindElement(By.Id("//input[@id='twotabsearchtextbox']"));
         private IWebElement SearchButton => Driver.FindElement(By.Id("nav-search-submit-button"));
 
         public void GoTo(string url)
@@ -26,7 +26,7 @@ namespace AmazonAutomation.Tests.Pages
 
         public void Search(string text)
         {
-            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             Wait.Until(ExpectedConditions.ElementToBeClickable(SearchBox));
             SearchBox.Clear();
             SearchBox.SendKeys(text);
