@@ -23,6 +23,7 @@ namespace AmazonAutomation.Tests.Utils
                 string localpath = new Uri(finalpth).LocalPath;
 
                 _htmlReporter = new ExtentSparkReporter(localpath);
+               
                 _extent = new ExtentReports();
                 _extent.AttachReporter(_htmlReporter);
             }
@@ -38,7 +39,7 @@ namespace AmazonAutomation.Tests.Utils
         {
             if (!string.IsNullOrEmpty(screenshotPath) && File.Exists(screenshotPath))
             {
-                _test.AddScreenCaptureFromPath(screenshotPath);
+                _test.AddScreenCaptureFromBase64String(screenshotPath);
             }
         }
 

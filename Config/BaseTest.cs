@@ -5,6 +5,7 @@ using AmazonAutomation.Tests.Utils;
 using OpenQA.Selenium.Support.UI;
 using AmazonAutomation.Tests.Data;
 using static AmazonAutomation.Tests.Utils.Reporting;
+using AventStack.ExtentReports;
 
 namespace AmazonAutomation.Tests.Config
 {
@@ -29,20 +30,19 @@ namespace AmazonAutomation.Tests.Config
         public void Results()
         {
             var outcome = TestContext.CurrentContext.Result.Outcome.Status;
-            var path    = ScreenshotHelper.Capture(Driver, TestContext.CurrentContext.Test.Name);
+            var path    = ScreenshotHelper.ScreenCaptureAsBase64String(Driver);
             var message = TestContext.CurrentContext.Result.Message;
 
             switch (outcome)
             {
                 case NUnit.Framework.Interfaces.TestStatus.Failed:
                     _test.Fail("<pre>" + Constants.TestDetails + message + "</pre>");
-                    Reporter.AddTestScreenshot(Constants.TestName, path, Constants.TestDetails);
+                    _test.AddScreenCaptureFromBase64String(path);
                     break;
 
                 case NUnit.Framework.Interfaces.TestStatus.Passed:
                     _test.Pass("<pre>" + Constants.TestDetails + "</pre>");
-                    Reporter.AddTestScreenshot(Constants.TestName, path, Constants.TestDetails);
-                    Driver.Quit();
+                    _test.AddScreenCaptureFromBase64String(path);
                     break;
             }    
         }

@@ -42,5 +42,13 @@ namespace AmazonAutomation.Tests.Utils
             screenshot.SaveAsFile(localpath, ScreenshotImageFormat.Png);
             return localpath;
         }
+
+
+        public static string ScreenCaptureAsBase64String(IWebDriver driver)
+        {
+            ITakesScreenshot ts = (ITakesScreenshot)driver;
+            Screenshot screenshot = ts.GetScreenshot();
+            return screenshot.AsBase64EncodedString;
+        }
     }
 }
