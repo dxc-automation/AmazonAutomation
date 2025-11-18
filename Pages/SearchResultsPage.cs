@@ -19,7 +19,8 @@ namespace AmazonAutomation.Tests.Pages
 
         public void ClickFirstExactMatch(string exactTitle)
         {
-            Wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(ResultTitles));
+  
+            WaitForClickable(By.XPath("//h2//span"));
             List<string> resultTitles = new List<string>();
 
             foreach (IWebElement el in ResultTitles)
